@@ -1,0 +1,52 @@
+package org.example;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.interactions.Actions;
+
+public class Sample {
+	public static void main(String[] args) {
+
+		WebDriver driver = new ChromeDriver();
+		driver.get("https://demo.automationtesting.in/Frames.html");
+
+		//clicking the button
+		driver.findElement(By.xpath("(//a[contains(text(),\"Iframe\")])[2]")).click();
+
+		//locating the iframe by indexno
+		WebElement iframe1 = driver.findElement(By.xpath("//iframe[@src=\"MultipleFrames.html\"]"));
+
+		//switching  inside the frame1
+		driver.switchTo().frame(iframe1);
+		String text1 = driver.findElement(By.xpath("//h5[text()='Nested iFrames']")).getText();
+		System.out.println(text1); //1st frames getting in
+
+		//switching inside the frame2
+		WebElement iframe2 = driver.findElement(By.xpath("//iframe[@src=\"SingleFrame.html\"]"));
+		driver.switchTo().frame(iframe2);
+
+		String text2= driver.findElement(By.xpath("//h5[text()=\"iFrame Demo\"]")).getText();
+		System.out.println(text2);
+
+		//pass the value inside the textfield
+		WebElement textfield = driver.findElement(By.xpath("//input[@type='text']"));
+		textfield.sendKeys("Professional Starting");
+
+		//switching back to frame1
+		driver.switchTo().parentFrame();
+		System.out.println("<=========Switching to Frame1 again================>");
+		String text11 = driver.findElement(By.xpath("//h5[text()='Nested iFrames']")).getText();
+		System.out.println(text11); //1st frames getting in
+
+		System.out.println("<===========Switching out of all frames===============>");
+		driver.switchTo().defaultContent();
+
+		//getting out of all frames and mousehover atmore options
+		WebElement more = driver.findElement(By.xpath("//a[text()=\"More\"]"));
+		Actions a = new Actions(driver);
+		a.moveToElement(more).perform();
+
+	}
+}
