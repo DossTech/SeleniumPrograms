@@ -1,0 +1,42 @@
+package org.example;
+
+import java.util.List;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.ui.Select;
+//1. Write a Selenium WebDriver test script to automate the following scenario:
+//- Open a web page with a dropdown
+//- Select an option from the dropdown
+//- Verify that the selected option is displayed correctly
+
+public class Sample {
+
+	public static void main(String[] args) {
+
+		WebDriver driver = new ChromeDriver();
+
+		//Open a web page with a dropdown
+		driver.get("https://practice.expandtesting.com/dropdown");
+
+		WebElement dropdown = driver.findElement(By.id("dropdown"));
+
+		Select s = new Select(dropdown);
+		//Select an option from the dropdown - let it be second option
+		s.selectByIndex(1);
+
+		//Verify that the selected option is displayed correctly
+		List<WebElement> options = s.getOptions();
+		WebElement option1 = options.get(1);
+		String text = option1.getText();
+		System.out.println(text.equalsIgnoreCase("option 1"));
+	}
+
+
+
+
+
+}
+
