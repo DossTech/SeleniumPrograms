@@ -1,0 +1,61 @@
+package org.example;
+
+import java.util.List;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.ui.Select;
+
+public class Sample {
+
+	public static void main(String[] args) {
+
+		WebDriver driver = new ChromeDriver();
+
+		//Open a web page with a dropdown
+		driver.get("https://practice.expandtesting.com/dropdown");
+
+		WebElement dropdown = driver.findElement(By.id("dropdown"));
+
+		Select s = new Select(dropdown);
+
+		//1. selectByVisibleText(String text): Selects an option based on its visible text.
+		//s.selectByVisibleText("Option 1");
+
+		//2. selectByIndex(int index): Selects an option based on its index.
+		//s.selectByIndex(1);
+
+
+		//3. selectByValue(String value): Selects an option based on its value attribute.
+		s.selectByValue("1");
+
+		//4. getOptions(): Returns a list of all options in the dropdown.
+		List<WebElement> options = s.getOptions();
+		for (WebElement web : options) {
+			String text = web.getText();
+			System.out.println(text);
+		}
+		System.out.println("<=========================>");
+		//5. getFirstSelectedOption(): Returns the first selected option in the dropdown.
+		WebElement web1 = s.getFirstSelectedOption();
+		System.out.println(web1.getText());
+		System.out.println("<=========================>");
+
+		
+	//	6. getAllSelectedOptions(): Returns a list of all selected options in the dropdown.
+		/*	
+		7. deselectAll(): Deselects all selected options in the dropdown.
+		8. deselectByVisibleText(String text): Deselects an option based on its visible text.
+		9. deselectByIndex(int index): Deselects an option based on its index.
+		10. deselectByValue(String value): Deselects an option based on its value attribute.
+		 */
+	}
+
+
+
+
+
+}
+
